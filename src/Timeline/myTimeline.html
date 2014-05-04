@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!--
+this HTML file gives you the Timeline your browser should get from the webserver.
+you can change it as you wish but the general structure must be the same. 
+good luck!
+-->
+<html>
+<head>
+<style type="text/css">
+td{
+	border-width:2px;
+	padding:6px;
+	border-style:groove;
+	border-color:gray;
+	text-align:left;
+	}
+
+</style>
+<title> My Timeline </title>
+
+<script type="text/javascript">
+function getFromServer()
+{
+	getUsersOnLine();	
+	getMyId();	
+	getPosts();
+	
+	
+
+}
+
+function getPosts()
+{
+	if (window.XMLHttpRequest)
+  	{// code for IE7+, Firefox, Chrome, Opera, Safari
+  		xmlhttp1=new XMLHttpRequest();
+  	}
+	else
+  	{// code for IE6, IE5
+ 	 xmlhttp1=new ActiveXObject("Microsoft.XMLHTTP");
+  	}
+	xmlhttp1.onreadystatechange=function()
+  	{
+  		if (xmlhttp1.readyState==4 && xmlhttp1.status==200)
+    		{	
+			txt="<table style=\"border-width:1px; border-collapse:collapse;\" width=\"90%;\">";			
+			txt=txt+xmlhttp1.responseText;
+			txt=txt+"</table>";
+    			document.getElementById('posts').innerHTML=txt;
+			
+    		}
+		
+  	}
+	xmlhttp1.open("GET","PostsOnMyWall.txt",true);
+	xmlhttp1.send();
+}
+
+function getMyId()
+{
+	if (window.XMLHttpRequest)
+  	{// code for IE7+, Firefox, Chrome, Opera, Safari
+  		xmlhttp2=new XMLHttpRequest();
+  	}
+	else
+  	{// code for IE6, IE5
+ 	 xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+  	}
+	xmlhttp2.onreadystatechange=function()
+  	{
+  		if (xmlhttp2.readyState==4 && xmlhttp2.status==200)
+    		{	
+    			document.getElementById('MyID').innerHTML=xmlhttp2.responseText;
+    		}
+		
+  	}
+	xmlhttp2.open("GET","MyUserID.txt",true);
+	xmlhttp2.send();
+}
+
+function getUsersOnLine()
+{
+	if (window.XMLHttpRequest)
+  	{// code for IE7+, Firefox, Chrome, Opera, Safari
+  		xmlhttp3=new XMLHttpRequest();
+  	}
+	else
+  	{// code for IE6, IE5
+ 	 xmlhttp3=new ActiveXObject("Microsoft.XMLHTTP");
+  	}
+	xmlhttp3.onreadystatechange=function()
+  	{
+  		if (xmlhttp3.readyState==4 && xmlhttp3.status==200)
+    		{	
+			n=xmlhttp3.responseText.split("\n");
+			txt="<select name=\"userid\">";			
+			for (i=0; i<n.length-1; i++) 
+			{
+				txt=txt+"<option value=\""+n[i]+"\">"+n[i]+"</option>";
+			}
+			txt=txt+"</select>";
+    			document.getElementById('userInfo1').innerHTML=txt;
+			document.getElementById('userInfo2').innerHTML=txt;
+    		}
+		
+  	}
+	xmlhttp3.open("GET","UsersOnLine.txt",true);
+	xmlhttp3.send();
+}	
+</script>
+
+</head><meta http-equiv="refresh" content="60" />
+<body onload="getFromServer();">
+<div style="position: fixed; right:0px; top:0px; width:30%; height:100%; border-left:thick double; background-color:#3b5998; color:white;">
+<table style="padding:8px; border-style:none;">
+<td style="padding:8px; border-style:none;"><font style="font-size:x-large;"><b>Send Picture:</b></font><br>
+
+
+<form action="." enctype="multipart/form-data" method="post" >
+<br>Please choose a user to send him a picture:&nbsp
+
+<div id="userInfo1">
+</div>
+
+<br><br>Please specify a file you want to send: <br>
+<input type="file" name="datafile" ><br><br>
+<input type="submit" value="Send">
+
+</form>
+
+</td></tr>
+<td style="padding:8px; padding-top:50px; border-style:none;"><font style="font-size:x-large;"><b>Send Text Message:</b></font><br>
+
+
+<form action="." enctype="multipart/form-data" method="post">
+
+<br>Please choose a user to send him a text message:&nbsp
+
+<div id="userInfo2">
+</div>
+
+<br><br>Type your text here:<br>
+<input type="text" name="textline" size="30">
+<input type="submit" value="Send">
+</form>
+
+</td></tr>
+<tr></tr>
+</table>
+<br>
+</div>
+
+<div align="center" style='position: static; width:70%'>
+
+<h1 style="background-color:#3b5998; color:white; padding:8px; width:90%;">Welcome to the timeline of user <span id="MyID"></span></h1>
+
+<div id="posts"></div>
+
+</div>
+
+</body>
+</html>

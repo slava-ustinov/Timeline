@@ -1,0 +1,4 @@
+<tr><td>user 306222222 says: Hello my good friend!!</td></tr>
+<tr><td>user 306444444 says: Hello my old friend!!</td></tr>
+<tr><td>user 306222222 upload picture:<br> <img src="3.jpg" width="100%"/> <br> uploaded at: 14:26 24/12/2012 </td></tr>
+<tr><td>user 306444444 upload picture:<br> <img src="2.jpg" width="100%"/> <br> uploaded at: 15:25 24/12/2012 </td></tr>
